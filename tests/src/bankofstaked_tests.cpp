@@ -23,13 +23,13 @@ class bankofstaked_tester : public tester
     {
        produce_blocks(2);
 
-        create_accounts({N(alice), N(bob), N(carol), N(eosio.token), N(bankofstaked)});
+        create_accounts({N(alice), N(bob), N(carol), N(gen.token), N(bankofstaked)});
         produce_blocks(2);
 
-        set_code(N(eosio.token), contracts::token_wasm());
-        set_abi(N(eosio.token), contracts::token_abi().data());
+        set_code(N(gen.token), contracts::token_wasm());
+        set_abi(N(gen.token), contracts::token_abi().data());
 
-        const auto &t = control->db().get<account_object, by_name>(N(eosio.token));
+        const auto &t = control->db().get<account_object, by_name>(N(gen.token));
         abi_def abi;
         BOOST_REQUIRE_EQUAL(abi_serializer::to_abi(t.abi, abi), true);
         token_abi_ser.set_abi(abi, abi_serializer_max_time);
@@ -55,7 +55,7 @@ class bankofstaked_tester : public tester
                          asset maximum_supply)
     {
 
-        return push_token_action(N(eosio.token), N(create), mvo()("issuer", issuer)("maximum_supply", maximum_supply));
+        return push_token_action(N(gen.token), N(create), mvo()("issuer", issuer)("maximum_supply", maximum_supply));
     }
 
     action_result issue(account_name issuer, account_name to, asset quantity, string memo)
@@ -79,7 +79,7 @@ class bankofstaked_tester : public tester
         string action_type_name = token_abi_ser.get_action_type(name);
 
         action act;
-        act.account = N(eosio.token);
+        act.account = N(gen.token);
         act.name = name;
         act.data = token_abi_ser.variant_to_binary(action_type_name, data, abi_serializer_max_time);
 
@@ -116,7 +116,7 @@ class bankofstaked_tester : public tester
     {
         auto symb = eosio::chain::symbol::from_string(symbolname);
         auto symbol_code = symb.to_symbol_code().value;
-        vector<char> data = get_row_by_account(N(eosio.token), acc, N(accounts), symbol_code);
+        vector<char> data = get_row_by_account(N(gen.token), acc, N(accounts), symbol_code);
         return data.empty() ? EMPTY : token_abi_ser.binary_to_variant("account", data, abi_serializer_max_time);
     }
 

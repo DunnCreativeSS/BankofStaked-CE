@@ -1,7 +1,7 @@
 #include <eosiolib/currency.hpp>
 #include <eosiolib/transaction.hpp>
-#include <eosio.token/eosio.token.hpp>
-#include <eosio.system/eosio.system.hpp>
+#include <gen.token.hpp>
+#include <gen.token.cpp>
 #include <../include/bankofstaked/bankofstaked.hpp>
 #include <lock.cpp>
 #include <utils.cpp>
@@ -365,7 +365,7 @@ public:
   //entry point of bankofstaked contract
   void apply(account_name contract, account_name action)
   {
-    if (action == N(transfer) and contract == N(eosio.token))
+    if (action == N(transfer) and contract == N(gen.token))
     {
       received_token(unpack_action_data<currency::transfer>());
       return;
@@ -446,7 +446,7 @@ private:
         std::string memo = recipient_name + " bankofstaked income";
         action act3 = action(
           permission_level{ code_account, N(bankperm) },
-          N(eosio.token), N(transfer),
+          N(gen.token), N(transfer),
           std::make_tuple(code_account, safe_transfer_account, order.price, memo)
         );
         out.actions.emplace_back(act3);
@@ -560,7 +560,7 @@ private:
         std::string buyer_name = username.to_string();
         std::string memo = buyer_name + " " + free_memo;
         INLINE_ACTION_SENDER(eosio::token, transfer)
-        (N(eosio.token), {{code_account, N(bankperm)}}, {code_account, safe_transfer_account, plan->price, memo});
+        (N(gen.token), {{code_account, N(bankperm)}}, {code_account, safe_transfer_account, plan->price, memo});
       }
 
       //deferred transaction to auto undelegate after expired

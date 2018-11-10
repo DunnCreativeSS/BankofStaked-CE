@@ -45,7 +45,7 @@ namespace utils
   asset get_balance(account_name owner)
   {
     auto symbol = symbol_type(system_token_symbol);
-    eosio::token t(N(eosio.token));
+    eosio::token t(N(gen.token));
     auto balance = t.get_balance(owner, symbol.name());
     // update creditor if balance is outdated
     creditor_table c(code_account, SCOPE_CREDITOR>>1);

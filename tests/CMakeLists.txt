@@ -30,7 +30,7 @@ if (NOT "${output}" EQUAL 0)
 endif()
 
 include_directories(AFTER ${BOOST_ROOT}/include)
-add_subdirectory(eosio.token)
+add_subdirectory(gen.token)
 
 if (APPLE)
    set(OPENSSL_ROOT "/usr/local/opt/openssl")
