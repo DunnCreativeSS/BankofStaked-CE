@@ -1,5 +1,5 @@
 #!/bin/bash
-IMAGE=eoslaomao/eos-dev:1.2.3
+IMAGE=eoslaomao/eos-dev:1.4.3
 NAME=bankofstaked
 FOLDER=bankofstaked
 
@@ -8,8 +8,8 @@ if [ $? -ne 0 ]; then
     echo "Run eos dev env "
     docker run --name $NAME-eos-dev -dit --rm -v  `(pwd)`:/$NAME $IMAGE
 fi
-docker cp /$NAME/src/gen.token.hpp /$NAME/
-docker cp /$NAME/src/gen.token.cpp /$NAME/
+docker cp /$NAME/src/poorman.token.hpp /$NAME/
+docker cp /$NAME/src/poorman.token.cpp /$NAME/
 docker exec $NAME-eos-dev eosiocpp -g /$NAME/$NAME.abi /$NAME/src/$NAME.cpp
 docker exec $NAME-eos-dev eosiocpp -o /$NAME/$NAME.wast /$NAME/src/$NAME.cpp
 docker exec nodeosd mkdir /$NAME
