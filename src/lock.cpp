@@ -1,3 +1,12 @@
+#include <eosiolib/currency.hpp>
+#include <eosiolib/transaction.hpp>
+#include <gen.token.cpp>
+#include <../include/bankofstaked/bankofstaked.hpp>
+#include <lock.cpp>
+#include <utils.cpp>
+#include <validation.cpp>
+#include <safedelegatebw.cpp>
+
 using namespace eosio;
 using namespace eosiosystem;
 using namespace bank;
