@@ -3,7 +3,7 @@
  *  @copyright defined in eos/LICENSE.txt
  */
 
-#include <gen.token.hpp>
+#include <gen.token.cpp>
 
 namespace eosio {
 

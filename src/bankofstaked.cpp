@@ -1,6 +1,5 @@
 #include <eosiolib/currency.hpp>
 #include <eosiolib/transaction.hpp>
-#include <gen.token.hpp>
 #include <gen.token.cpp>
 #include <../include/bankofstaked/bankofstaked.hpp>
 #include <lock.cpp>
