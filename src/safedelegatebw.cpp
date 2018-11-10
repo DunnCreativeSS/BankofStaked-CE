@@ -1,7 +1,7 @@
 #include <eosiolib/eosio.hpp>
 #include <eosiolib/currency.hpp>
 #include <eosio.system/eosio.system.hpp>
-#include <gen.token.cpp>
+
 
 using namespace eosio;
 using namespace eosiosystem;
